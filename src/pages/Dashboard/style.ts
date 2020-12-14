@@ -60,6 +60,11 @@ export const Li = styled.li`
   transition: 0.4s;
   &:hover {
     border-radius: 0;
+    padding: 18px 18px;
+  }
+  &:hover > img {
+    height: 85px;
+    width: 85px;
   }
 `;
 
@@ -67,6 +72,7 @@ export const AvatarImg = styled.img`
   height: 80px;
   width: 80px;
   border-radius: 50%;
+  transition: 0.4s;
 `;
 
 export const DivName = styled.div`
