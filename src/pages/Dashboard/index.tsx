@@ -1,4 +1,4 @@
-import React, { useState, FormEvent } from 'react';
+import React, { useState, FormEvent, useEffect } from 'react';
 import { BsChevronRight } from 'react-icons/bs';
 import api from '../../services/api';
 import {
@@ -14,6 +14,7 @@ import {
   Name,
   Description,
   Arrow,
+  Error,
 } from './style';
 import LogoImg from '../../assets/logo.svg';
 
@@ -28,13 +29,33 @@ interface Repository {
 
 const Dashboard: React.FC = () => {
   const [NewRepo, setNewRepo] = useState('');
-  const [repositories, setReposities] = useState<Repository[]>([]);
+  const [repositories, setReposities] = useState<Repository[]>(() => {
+    const storageRepository = localStorage.getItem('@GitHubExplorer');
+    if (storageRepository) return JSON.parse(storageRepository);
+    return [];
+  });
+  const [inputError, setInputError] = useState('');
+  useEffect(() => {
+    localStorage.setItem('@GitHubExplorer', JSON.stringify(repositories));
+  }, [repositories]);
+
   async function handleAddRepository(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const response = await api.get<Repository>(`repos/${NewRepo}`);
-    const repository = response.data;
-    setReposities([...repositories, repository]);
-    setNewRepo('');
+    if (!NewRepo) {
+      setInputError('Digite o autor/nome do repositório!');
+      return;
+    }
+    try {
+      const response = await api.get<Repository>(`repos/${NewRepo}`);
+      const repository = response.data;
+      setReposities([...repositories, repository]);
+      setNewRepo('');
+      setInputError('');
+    } catch (err) {
+      setInputError(
+        `Erro na busca pelo autor/repositório, verifique se está escrito corretamente!`,
+      );
+    }
   }
   return (
     <>
@@ -42,12 +63,14 @@ const Dashboard: React.FC = () => {
       <Title>Explore repositórios no Github</Title>
       <Form onSubmit={handleAddRepository}>
         <Input
+          hasError={Boolean(inputError)}
           placeholder="Digite Aqui!"
           value={NewRepo}
           onChange={e => setNewRepo(e.target.value)}
         />
         <Button>Pesquisar</Button>
       </Form>
+      {inputError && <Error>{inputError}</Error>}
       <Ul>
         {repositories.map(repository => (
           <Li key={repository.full_name}>

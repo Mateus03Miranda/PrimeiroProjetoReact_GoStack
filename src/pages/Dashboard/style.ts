@@ -1,5 +1,9 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { style } from 'typestyle';
+
+interface InputProps {
+  hasError: boolean;
+}
 
 export const Title = styled.h1`
   font-size: 48px;
@@ -19,13 +23,21 @@ export const Form = styled.form`
   margin-top: 30px;
 `;
 
-export const Input = styled.input`
+export const Input = styled.input<InputProps>`
   width: 75%;
   border: none;
-  border-radius: 10px;
+  border-radius: 10px 0px 0px 10px;
   color: #a8a8b3;
   padding-left: 20px;
   transition: 0.6s;
+  ${props =>
+    props.hasError &&
+    css`
+      background-color: #fae8e8;
+      color: #000;
+      border: 2px solid #f00;
+      border-right: 0;
+    `}
   &:hover {
     border-radius: 0;
     padding-left: 10px;
@@ -42,6 +54,7 @@ export const Button = styled.button`
   transition: 0.4s;
   &:hover {
     background-color: #04b553;
+    border-radius: 10px;
   }
 `;
 
@@ -109,3 +122,9 @@ export const Arrow = style({
     },
   },
 });
+
+export const Error = styled.span`
+  color: #c53030;
+  margin-top: 8px;
+  display: block;
+`;
