@@ -1,5 +1,6 @@
 import React, { useState, FormEvent, useEffect } from 'react';
 import { BsChevronRight } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
 import api from '../../services/api';
 import {
   Title,
@@ -82,7 +83,9 @@ const Dashboard: React.FC = () => {
               <Name>{repository.full_name}</Name>
               <Description>{repository.description}</Description>
             </DivName>
-            <BsChevronRight className={Arrow} />
+            <Link className="Link" to={`repository/${repository.full_name}`}>
+              <BsChevronRight className={Arrow} />
+            </Link>
           </Li>
         ))}
       </Ul>

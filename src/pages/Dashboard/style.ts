@@ -79,6 +79,9 @@ export const Li = styled.li`
     height: 85px;
     width: 85px;
   }
+  .Link {
+    align-self: center;
+  }
 `;
 
 export const AvatarImg = styled.img`

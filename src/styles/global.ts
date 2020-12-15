@@ -13,7 +13,7 @@ export default createGlobalStyle`
     background:#F0F0F5 url(${githubBackground}) no-repeat 70% top;
   }
 
-  body, input, button{
+  body, input, button, span{
     font:16px Roboto, sans-serif;
   }
 
