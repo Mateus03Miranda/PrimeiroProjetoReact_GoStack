@@ -1,7 +1,7 @@
 import React from 'react';
 // import { useRouteMatch } from 'react-router-dom';
-import { BsChevronLeft } from 'react-icons/bs';
-import { Header, Section } from './style';
+import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
+import { Header, Section, List } from './style';
 
 import Logo from '../../assets/logo.svg';
 import profile from '../../assets/Profile.jpg';
@@ -17,10 +17,11 @@ const Repository: React.FC = () => {
       <Header>
         <img src={Logo} alt="Github Explorer Logo" />
         <div className="back">
-          <BsChevronLeft className="Arrow" />
+          <BsChevronLeft className="LeftArrow" />
           <span>Voltar</span>
         </div>
       </Header>
+
       <Section>
         <div className="avatar">
           <img src={profile} alt="Mateus Miranda" />
@@ -44,6 +45,21 @@ const Repository: React.FC = () => {
           </div>
         </div>
       </Section>
+
+      <List>
+        <section>
+          <p>gostack-desafio-conceitos-react-native</p>
+          <span>Mateus Miranda</span>
+        </section>
+        <BsChevronRight className="RightArrow" />
+      </List>
+      <List>
+        <section>
+          <p>gostack-desafio-conceitos-react-native</p>
+          <span>Mateus Miranda</span>
+        </section>
+        <BsChevronRight className="RightArrow" />
+      </List>
     </>
   );
 };
