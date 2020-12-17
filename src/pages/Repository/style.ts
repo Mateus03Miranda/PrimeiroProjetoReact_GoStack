@@ -8,10 +8,11 @@ export const Header = styled.header`
   img {
     height: 25px;
   }
-  div {
+  a {
     display: flex;
     align-items: center;
     cursor: pointer;
+    text-decoration: none;
     transition: 0.6s;
     &:hover {
       margin-right: 10px;
@@ -42,7 +43,7 @@ export const Section = styled.section`
   margin-bottom: 80px;
   display: flex;
   flex-direction: column;
-  width: 510px;
+  max-width: 510px;
   .avatar {
     display: flex;
     align-items: center;
@@ -56,7 +57,7 @@ export const Section = styled.section`
       display: flex;
       flex-direction: column;
       margin-left: 13px;
-
+      flex-wrap: wrap;
       .name {
         font-size: 36px;
         color: #3d3d4d;
@@ -101,6 +102,7 @@ export const List = styled.a`
   align-items: center;
   border-radius: 10px;
   transition: 0.4s;
+  text-decoration: none;
   section {
     margin: 28px 0px 27px 24px;
     transition: 0.4s;
